@@ -42,12 +42,17 @@ airbrake.notify(err, function(err, url) {
 
 A custom error handler will need to be set for Express:
 
+Express 3.X
+``` javascript
+var airbrake = require('airbrake').createClient("your api key");
+app.use(airbrake.expressHandler())
+```
+
+Express 2.X
 ``` javascript
 var airbrake = require('airbrake').createClient("your api key");
 app.error(airbrake.expressHandler())
 ```
-
-This has been verified with Express 2.X
 
 ## Screenshot
 
@@ -194,6 +199,10 @@ Do not post to Airbrake when running in these environments.
 ### airbrake.timeout = 30 * 1000
 
 The timeout after which to give up trying to notify airbrake in ms.
+
+### airbrake.requestOptions = {}
+
+Additional request options that are merged with the default set of options that are passed to `request` during `notify()` and `trackDeployment()`.
 
 ### airbrake.handleExceptions()
 
